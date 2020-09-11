@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import CreateSimpleHelp from './components/CreateSimpleHelp'
 import CreateRegularHelp from './components/CreateRegularHelp';
+import CreateDonationButton from './components/CreateDonationButton';
 
 function HomeScreen({ navigation }) {
   return (
@@ -23,16 +24,13 @@ function Donations({ navigation }) {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>У Вас пока нет сборов.</Text>
         <Text>Начниете доброе дело.</Text>
+        <Text></Text>
         <TouchableOpacity
-            style={styles.button}
+            style={styles.createDonationButton}
             onPress={() => navigation.navigate('DonationType')}
         >
-            <Text>Создать сбор</Text>
+            <CreateDonationButton />
         </TouchableOpacity>
-        <Button
-          title="Создать сбор"
-          onPress={() => navigation.navigate('DonationType')}
-        />
       </View>
     );
 }
@@ -199,6 +197,13 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFFFFF",
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    createDonationButton: {
+        backgroundColor: "#4986CC",
+        borderRadius: 10,
+        display: "flex",
+        flexDirection: "row",
+        padding: 0
     }
   });
 
