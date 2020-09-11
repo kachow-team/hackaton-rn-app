@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, View, Text, TextInput } from 'react-native';
+import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -20,6 +20,12 @@ function Donations({ navigation }) {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>У Вас пока нет сборов.</Text>
         <Text>Начниете доброе дело.</Text>
+        <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('DonationType')}
+        >
+            <Text>Создать сбор</Text>
+        </TouchableOpacity>
         <Button
           title="Создать сбор"
           onPress={() => navigation.navigate('DonationType')}
@@ -162,5 +168,22 @@ function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+      paddingHorizontal: 10
+    },
+    button: {
+      alignItems: "center",
+      backgroundColor: "#DDDDDD",
+      padding: 10
+    },
+    countContainer: {
+      alignItems: "center",
+      padding: 10
+    }
+  });
 
 export default App;
