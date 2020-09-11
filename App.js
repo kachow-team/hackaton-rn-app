@@ -22,11 +22,26 @@ function Donations({ navigation }) {
         <Text>Начниете доброе дело.</Text>
         <Button
           title="Создать сбор"
+          onPress={() => navigation.navigate('DonationType')}
+        />
+      </View>
+    );
+}
+
+function DonationType({ navigation }) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Button
+          title="Целевой сбор Когда есть определенная цель"
+          onPress={() => navigation.navigate('Details')}
+        />
+        <Button
+          title="Регулярный сбор Если помощь нужна ежемесячно"
           onPress={() => navigation.navigate('Details')}
         />
       </View>
     );
-  }
+}
 
 function DetailsScreen({ navigation }) {
     return (
@@ -52,7 +67,8 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Donations">
-        <Stack.Screen name="Donations" component={Donations} />
+        <Stack.Screen name="Donations" title="Пожертвования" component={Donations} />
+        <Stack.Screen name="DonationType" component={DonationType} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
