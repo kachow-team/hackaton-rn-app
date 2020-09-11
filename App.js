@@ -37,14 +37,20 @@ function Donations({ navigation }) {
 function DonationType({ navigation }) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button
-          title="Целевой сбор Когда есть определенная цель"
-          onPress={() => navigation.navigate('TargetDonation')}
-        />
-        <Button
-          title="Регулярный сбор Если помощь нужна ежемесячно"
-          onPress={() => navigation.navigate('RegularDonation')}
-        />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('TargetDonation')}
+        >
+            <Text>Целевой сбор</Text>
+            <Text>Когда есть определенная цель</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('RegularDonation')}
+        >
+            <Text>Регулярный сбор</Text>
+            <Text>Если помощь нужна ежемесячно</Text>
+        </TouchableOpacity>
       </View>
     );
 }
