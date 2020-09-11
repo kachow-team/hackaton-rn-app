@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import {useState, useEffect} from 'react';
+import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import ImagePicker from 'react-native-image-picker';
 
 import CreateSimpleHelp from './components/CreateSimpleHelp'
 import CreateRegularHelp from './components/CreateRegularHelp';
 import CreateDonationButton from './components/CreateDonationButton';
+import UploadPicCover from './components/UploadPicCover';
 
 function HomeScreen({ navigation }) {
   return (
@@ -20,8 +23,10 @@ function HomeScreen({ navigation }) {
 }
 
 function Donations({ navigation }) {
+    const [avatarSource, setAvatarSource] = useState(null);
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.donationsScreen}>
+        <Image source={avatarSource} style={styles.uploadAvatar} />
         <Text>У Вас пока нет сборов.</Text>
         <Text>Начниете доброе дело.</Text>
         <Text></Text>
@@ -60,6 +65,12 @@ function DonationType({ navigation }) {
 function TargetDonation({ navigation }) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('TargetDonation')}
+        >
+              <UploadPicCover />
+        </TouchableOpacity>
         <Button
           title="Загрузить обложку"
           onPress={() => navigation.navigate('Details')}
@@ -198,12 +209,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    donationsScreen: {
+        flex: 1,
+        backgroundColor: "#FFFFFF",
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     createDonationButton: {
         backgroundColor: "#4986CC",
         borderRadius: 10,
         display: "flex",
         flexDirection: "row",
         padding: 0
+    },
+    uploadAvatar: {
+        backgroundColor: "#DDDDDD",
+        justifyContent: "center"
     }
   });
 
