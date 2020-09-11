@@ -3,6 +3,9 @@ import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'rea
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import CreateSimpleHelp from './components/CreateSimpleHelp'
+import CreateRegularHelp from './components/CreateRegularHelp';
+
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -41,16 +44,17 @@ function DonationType({ navigation }) {
             style={styles.button}
             onPress={() => navigation.navigate('TargetDonation')}
         >
-            <Text>Целевой сбор</Text>
-            <Text>Когда есть определенная цель</Text>
+              <CreateSimpleHelp />
         </TouchableOpacity>
         <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('RegularDonation')}
         >
-            <Text>Регулярный сбор</Text>
-            <Text>Если помощь нужна ежемесячно</Text>
+            <CreateRegularHelp />
         </TouchableOpacity>
+
+
+
       </View>
     );
 }
