@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
-import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { Button, View, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ImagePicker from 'react-native-image-picker';
+import Constants from 'expo-constants';
 
 import CreateSimpleHelp from './components/CreateSimpleHelp'
 import CreateRegularHelp from './components/CreateRegularHelp';
@@ -110,13 +111,16 @@ function TargetDonation({ navigation }) {
 
 function RegularDonation({ navigation }) {
     return (
-      <View style={styles.donationTypeScreen}>
-        <Button
-          title="Загрузить обложку"
-          onPress={() => navigation.navigate('Details')}
-        />
+      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('TargetDonation')}
+        >
+              <UploadPicCover />
+        </TouchableOpacity>
         <Text style={styles.textInputDescription} >
-            Тут должно быть название сбора</Text>
+            Название сбора</Text>
         <TextInput
             style={styles.textInput}
             placeholder="Название сбора"
@@ -162,7 +166,8 @@ function RegularDonation({ navigation }) {
           title="Далее"
           onPress={() => navigation.navigate('Details')}
         />
-      </View>
+      </ScrollView>
+      </SafeAreaView>
     );
 }
 
@@ -229,6 +234,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     textInput: {
+      marginLeft: '2.5%',
         "backgroundColor": "#F2F3F5",
         "borderWidth": 0.5,
         "borderColor": "rgba(0, 0, 0, 0.12)",
@@ -265,6 +271,13 @@ const styles = StyleSheet.create({
     uploadAvatar: {
         backgroundColor: "#DDDDDD",
         justifyContent: "center"
+    },
+    container: {
+      flex: 1,
+      marginTop: Constants.statusBarHeight,
+    },
+    scrollView: {
+      backgroundColor: '#ffffff',
     }
   });
 
