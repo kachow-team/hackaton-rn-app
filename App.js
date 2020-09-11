@@ -39,7 +39,7 @@ function Donations({ navigation }) {
 
 function DonationType({ navigation }) {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.donationTypeScreen}>
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('TargetDonation')}
@@ -187,12 +187,18 @@ const styles = StyleSheet.create({
     },
     button: {
       alignItems: "center",
-      backgroundColor: "#DDDDDD",
+      backgroundColor: "#FFFFFF",
       padding: 10
     },
     countContainer: {
       alignItems: "center",
       padding: 10
+    },
+    donationTypeScreen: {
+        flex: 1,
+        backgroundColor: "#FFFFFF",
+        alignItems: 'center',
+        justifyContent: 'center'
     }
   });
 
