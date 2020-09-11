@@ -64,7 +64,7 @@ function DonationType({ navigation }) {
 
 function TargetDonation({ navigation }) {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.donationTypeScreen}>
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('TargetDonation')}
@@ -110,37 +110,50 @@ function TargetDonation({ navigation }) {
 
 function RegularDonation({ navigation }) {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.donationTypeScreen}>
         <Button
           title="Загрузить обложку"
           onPress={() => navigation.navigate('Details')}
         />
-        <Text>Название сбора</Text>
+        <Text style={styles.textInputDescription} >
+            Тут должно быть название сбора</Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.textInput}
             placeholder="Название сбора"
         />
-        <Text>Сумма, ₽</Text>
+          <Text style={styles.textInputDescription} >
+              Сумма, ₽
+          </Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.textInput}
             placeholder="Сколько нужно в месяц?"
         />
-        <Text>Цель</Text>
+          <Text style={styles.textInputDescription}>
+              Цель
+          </Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.textInput}
             placeholder="Например, поддержка приюта"
         />
-        <Text>Описание</Text>
+          <Text style={styles.textInputDescription}>
+        Описание
+          </Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            multiline={true}
+            numberOfLines={2}
+            style={{...styles.textInput, height:70}}
             placeholder="На что пойдут деньги и как они кому-то помогут?"
         />
-        <Text>Куда получать деньги?</Text>
+          <Text style={styles.textInputDescription}>
+              Куда получать деньги?
+          </Text>
         <TextInput
             style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
             value="Счет VK Pay · 1234"
         />
-        <Text>Автор</Text>
+          <Text style={styles.textInputDescription}>
+              Автор
+          </Text>
         <TextInput
             style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
             value="Матвей Правосудов"
@@ -214,6 +227,33 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFFFFF",
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    textInput: {
+        "backgroundColor": "#F2F3F5",
+        "borderWidth": 0.5,
+        "borderColor": "rgba(0, 0, 0, 0.12)",
+        "borderStyle": "solid",
+        "borderTopLeftRadius": 10,
+        "borderTopRightRadius": 10,
+        "borderBottomRightRadius": 10,
+        "borderBottomLeftRadius": 10,
+        "width": '95%',
+        "height": 40,
+        "paddingLeft": 15,
+        marginBottom: 30,
+
+    },
+    textInputDescription:{
+        alignSelf:'flex-start',
+        marginLeft: '2.5%',
+        marginBottom: 8,
+        color:'#6D7885',
+        //"fontFamily": "SF Pro Text",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "fontSize": 14,
+        "lineHeight": 18,
+        "letterSpacing": -0.154,
     },
     createDonationButton: {
         backgroundColor: "#4986CC",
