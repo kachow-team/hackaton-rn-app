@@ -177,7 +177,7 @@ placeholder="Например, лечение человека"
           <TextInput
                             multiline={true}
                             numberOfLines={2}
-                            style={{...styles.textInput, height: 70}}
+                            style={{...styles.textInput, height: 70, paddingTop:10}}
                             placeholder="На что пойдут деньги и как они кому-то помогут?"
                         />
         <Text style={styles.textInputDescription} >
@@ -252,7 +252,7 @@ class RegularDonation extends React.Component<props> {
                         <TextInput
                             multiline={true}
                             numberOfLines={2}
-                            style={{...styles.textInput, height: 70}}
+                            style={{...styles.textInput, height: 70, paddingTop:10}}
                             placeholder="На что пойдут деньги и как они кому-то помогут?"
                         />
                         <Text style={styles.textInputDescription}>
@@ -383,7 +383,7 @@ function Feed({route, navigation }) {
                     </View>
                     <View>
                     <TouchableOpacity
-                      
+
                       onPress={() => navigation.navigate('BigMock', {picSource: picSource, donationName: donationName, author: author})}
                     >
                     <HelpOutlineButton />
@@ -418,7 +418,7 @@ function BigMock({ route, navigation }) {
         <View>
           <PostFooter/>
         </View>
-                
+
     </KeyboardAvoidingView>
     </ScrollView>
     </SafeAreaView>
@@ -562,7 +562,7 @@ const styles = StyleSheet.create({
 
 const pickerSelectStyles = StyleSheet.create({
     inputIOS: {
-        marginLeft: '2.5%',
+        marginLeft: '5.5%',
         "backgroundColor": "#F2F3F5",
         "borderWidth": 0.5,
         "borderColor": "rgba(0, 0, 0, 0.12)",
@@ -571,14 +571,15 @@ const pickerSelectStyles = StyleSheet.create({
         "borderTopRightRadius": 10,
         "borderBottomRightRadius": 10,
         "borderBottomLeftRadius": 10,
-        "width": '95%',
+        "width": '88%',
         "height": 40,
         "paddingLeft": 15,
         marginBottom: 30,
         paddingRight: 30, // to ensure the text is never behind the icon
+
     },
     inputAndroid: {
-        marginLeft: '2.5%',
+        marginLeft: '5.5%',
         "backgroundColor": "#F2F3F5",
         "borderWidth": 0.5,
         "borderColor": "rgba(0, 0, 0, 0.12)",
@@ -587,7 +588,7 @@ const pickerSelectStyles = StyleSheet.create({
         "borderTopRightRadius": 10,
         "borderBottomRightRadius": 10,
         "borderBottomLeftRadius": 10,
-        "width": '95%',
+        "width": '88%',
         "height": 40,
         "paddingLeft": 15,
         marginBottom: 30,
@@ -596,7 +597,7 @@ const pickerSelectStyles = StyleSheet.create({
     },
     iconContainer: {
         top: 8,
-        right: 17,
+        right: 34,
     }
 });
 
