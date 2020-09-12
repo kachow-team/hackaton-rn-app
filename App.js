@@ -185,6 +185,7 @@ function TargetDonation({ navigation }) {
 
 class RegularDonation extends React.Component<props> {
     state = {
+        donationName: '',
         author: 'user'
     };
     render() {
@@ -201,6 +202,7 @@ class RegularDonation extends React.Component<props> {
                         <TextInput
                             style={styles.textInput}
                             placeholder="Название сбора"
+                            onChangeText={((value)=> this.setState({donationName:value}))}
                         />
                         <Text style={styles.textInputDescription}>
                             Сумма, ₽
@@ -268,7 +270,7 @@ class RegularDonation extends React.Component<props> {
                         />
                         <TouchableOpacity
                             style={{...styles.button, marginBottom:40}}
-                            onPress={() => this.props.navigation.navigate('Feed', {author: this.state.author})}
+                            onPress={() => this.props.navigation.navigate('Feed', {author: this.state.author, donationName: this.state.donationName})}
                         >
                             <NextButton />
                         </TouchableOpacity>
@@ -300,7 +302,8 @@ function DetailsScreen({ navigation }) {
 
 function Feed({route, navigation }) {
     const { author } = route.params;
-    const { otherParam } = route.params;
+    const { donationName } = route.params;
+console.log(donationName);
     return (
         <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center', width:'95%', marginLeft:'5.5%', marginRight:'5.5%'}}>
             <Text>Лента новостей (бета)</Text>
@@ -309,7 +312,7 @@ function Feed({route, navigation }) {
                     <Text>Картинка</Text>
                 </View>
                     <View>
-                        <Text>Добряши помогают</Text>
+                        <Text>{donationName}</Text>
                         <Text>{author}</Text>
                     </View>
                 <View style={{flexDirection:'row', alignItems:'space-around'}}>
