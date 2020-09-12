@@ -240,10 +240,10 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Donations">
-        <Stack.Screen name="Donations" title="Пожертвования" component={Donations} />
-        <Stack.Screen name="DonationType" component={DonationType} />
-        <Stack.Screen name="TargetDonation" component={TargetDonation} />
-        <Stack.Screen name="RegularDonation" component={RegularDonation} />
+        <Stack.Screen name="Donations" options={{title:"Пожертвования"}} component={Donations} />
+        <Stack.Screen name="DonationType" options={{title:"Тип сбора"}} component={DonationType} />
+        <Stack.Screen name="TargetDonation" options={{title:"Целевой сбор"}} component={TargetDonation} />
+        <Stack.Screen name="RegularDonation" options={{title:"Регулярный сбор"}} component={RegularDonation} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
