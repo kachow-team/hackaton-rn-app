@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
-import { Button, View, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { Button, View, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ImagePicker from 'react-native-image-picker';
@@ -25,7 +25,7 @@ function MyImagePicker({ something }) {
     const pick = () => {
       ImagePicker.showImagePicker(options, (response) => {
         console.log('Response = ', response);
-      
+
         if (response.didCancel) {
           console.log('User cancelled image picker');
         } else if (response.error) {
@@ -161,8 +161,11 @@ function TargetDonation({ navigation }) {
 
 function RegularDonation({ navigation }) {
     return (
-      <SafeAreaView style={styles.container}>
+
+
+              <SafeAreaView>
       <ScrollView style={styles.scrollView}>
+          <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{flex: 1}} keyboardVerticalOffset={150}>
         <MyImagePicker />
         <Text style={styles.textInputDescription} >
             Название сбора</Text>
@@ -211,8 +214,10 @@ function RegularDonation({ navigation }) {
           title="Далее"
           onPress={() => navigation.navigate('Details')}
         />
+          </KeyboardAvoidingView>
       </ScrollView>
-      </SafeAreaView>
+              </SafeAreaView>
+
     );
 }
 
@@ -239,7 +244,8 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Donations">
+      <Stack.Navigator initialRouteName="Donations" screenOptions={{
+          headerBackTitleVisible: false}}>
         <Stack.Screen name="Donations" options={{title:"Пожертвования"}} component={Donations} />
         <Stack.Screen name="DonationType" options={{title:"Тип сбора"}} component={DonationType} />
         <Stack.Screen name="TargetDonation" options={{title:"Целевой сбор"}} component={TargetDonation} />
