@@ -379,7 +379,12 @@ function Feed({route, navigation }) {
                             </View>
                     </View>
                     <View>
-                        <HelpOutlineButton />
+                    <TouchableOpacity
+                      
+                      onPress={() => navigation.navigate('BigMock', {picSource: picSource, donationName: donationName, author: author})}
+                    >
+                    <HelpOutlineButton />
+                    </TouchableOpacity>
                     </View>
                 </View>
             </View>
