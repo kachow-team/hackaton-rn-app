@@ -316,9 +316,12 @@ function Feed({route, navigation }) {
     const { donationName } = route.params;
     const { picSource } = route.params;
     return (
+        <View style={{flex:1, backgroundColor:'#FFFFFF'}}>
         <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center', marginLeft:'5.5%', marginRight:'5.5%'}}>
+
+
                 <View style={{backgroundColor:'black', width:"100%", height:"20%", borderRadius:10}}>
-                    <Image source={picSource} style={{borderRadius:10, width:"100%", height:"100%"}} />
+                    <Image source={picSource} style={{width:"100%", height:"100%", borderTopLeftRadius:10, borderTopRightRadius:10}} />
                 </View>
                     <View style={{marginTop:'3%'}}>
                         <Text style={
@@ -366,7 +369,9 @@ function Feed({route, navigation }) {
                         <HelpOutlineButton />
                     </View>
                 </View>
+
             </View>
+        </View>
 
     );
 }
