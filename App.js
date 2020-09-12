@@ -10,6 +10,7 @@ import CreateSimpleHelp from './components/CreateSimpleHelp'
 import CreateRegularHelp from './components/CreateRegularHelp';
 import CreateDonationButton from './components/CreateDonationButton';
 import UploadPicCover from './components/UploadPicCover';
+import DismissOverlay from './components/DismissOverlay';
 
 function HomeScreen({ navigation }) {
   return (
@@ -174,14 +175,25 @@ function RegularDonation({ navigation }) {
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         {picSource == null ? (
+          <View style={{paddingVertical:20, paddingHorizontal:20, width:"100%", height:"30%"}}>
         <TouchableOpacity
             style={styles.button}
             onPress={pick}
         >
               <UploadPicCover />
         </TouchableOpacity>
+        </View>
         ) : (
-          <Image source={picSource} style={styles.uploadPic} />
+          <View style={{paddingVertical:20, paddingHorizontal:20, width:"100%", height:"30%"}}>
+          <Image resizeMode="cover" source={picSource} style={{borderRadius:10,width:"100%", height:"100%"}} />
+          <View style={{position:"absolute", top:30, right:30}}>
+          <TouchableOpacity
+          onPress={() => {setPicSource(null)}}
+          >
+          <DismissOverlay />
+          </TouchableOpacity>
+          </View>
+          </View>
         )}
         <Text style={styles.textInputDescription} >
             Название сбора</Text>
@@ -274,7 +286,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: "center",
-      paddingHorizontal: 10
+      marginTop: Constants.statusBarHeight,
     },
     button: {
       alignItems: "center",
@@ -334,12 +346,29 @@ const styles = StyleSheet.create({
     },
     uploadPic: {
         backgroundColor: "#DDDDDD",
-        justifyContent: "center",
-        width: 100, height: 50
+        //justifyContent: "center",
+        alignSelf: "flex-start",
+        display: "flex",
+//        width: "90%",
+  //      height: "20%",
+        margin: 10,
+        resizeMode: "cover",
     },
-    container: {
+    canvas: {
+      flex: 1
+    //  position: 'absolute',
+    //  top: 0,
+    //  left: 0,
+    //  bottom: 0,
+    //  right: 0,
+    },
+    canvContainer: {
       flex: 1,
-      marginTop: Constants.statusBarHeight,
+      alignItems: 'stretch',
+      //justifyContent: 'center',
+      //alignItems: 'center',
+      //backgroundColor: '#F5FCFF',
+      //position: 'relative'
     },
     scrollView: {
       backgroundColor: '#ffffff',
