@@ -34,9 +34,9 @@ function MyImagePicker({ something }) {
           console.log('User tapped custom button: ', response.customButton);
         } else {
           //const source = 'data:image/jpeg;base64,' + response.data;
-           const source = { uri: response.uri };
+          const source = { uri: response.uri };
           //const source = { uri: 'data:image/jpeg;base64,' + response.data };
-          console.log('source = ', source);
+          //console.log('source = ', source);
           // You can also display the image using data:
           // const source = { uri: 'data:image/jpeg;base64,' + response.data };
           setPicSource(source);
