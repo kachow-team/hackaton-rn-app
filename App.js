@@ -133,6 +133,7 @@ function TargetDonation({ navigation }) {
     return (
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{flex: 1}} keyboardVerticalOffset={150}>
         <MyImagePicker />
         <Text style={styles.textInputDescription} >
           Название сбора
@@ -175,6 +176,7 @@ function TargetDonation({ navigation }) {
         >
               <NextButton />
         </TouchableOpacity>
+        </KeyboardAvoidingView>
       </ScrollView>
       </SafeAreaView>
     );
@@ -252,10 +254,12 @@ function RegularDonation({ navigation }) {
 
                   }}
               />
-        <Button
-          title="Далее"
-          onPress={() => navigation.navigate('Feed')}
-        />
+        <TouchableOpacity
+            style={{...styles.button, marginBottom:40}}
+            onPress={() => navigation.navigate('Feed')}
+        >
+              <NextButton />
+        </TouchableOpacity>
           </KeyboardAvoidingView>
       </ScrollView>
               </SafeAreaView>
