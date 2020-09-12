@@ -189,7 +189,7 @@ placeholder="Например, лечение человека"
         />
         <TouchableOpacity
             style={{...styles.button, marginBottom:40}}
-            onPress={() => this.props.navigation.navigate('BigMock', {picSource: this.state.picSource, donationName: this.state.donationName})}
+            onPress={() => this.props.navigation.navigate('Feed', {author: "Андрей Иванов", donationName: this.state.donationName, picSource: this.state.picSource})}
         >
               <NextButton />
         </TouchableOpacity>
