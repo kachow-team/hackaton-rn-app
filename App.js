@@ -20,6 +20,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import Svg, {
     Path,
 } from 'react-native-svg';
+import HelpOutlineButton from './components/HelpOutlineButton';
 
 function MyImagePicker({ something }) {
   const [picSource, setPicSource] = useState(null);
@@ -176,95 +177,107 @@ function TargetDonation({ navigation }) {
         >
               <NextButton />
         </TouchableOpacity>
-        </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
       </ScrollView>
       </SafeAreaView>
     );
 }
 
-function RegularDonation({ navigation }) {
-    const [author, changeAuthor] = useState('user');
-    return (
+class RegularDonation extends React.Component<props> {
+    state = {
+        author: 'user'
+    };
+    render() {
+        return (
 
 
-              <SafeAreaView style={{backgroundColor:'#FFFFFF'}}>
-      <ScrollView style={styles.scrollView} >
-          <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{flex: 1}} keyboardVerticalOffset={150}>
-        <MyImagePicker />
-        <Text style={styles.textInputDescription} >
-            Название сбора</Text>
-        <TextInput
-            style={styles.textInput}
-            placeholder="Название сбора"
-        />
-          <Text style={styles.textInputDescription} >
-              Сумма, ₽
-          </Text>
-        <TextInput
-            style={styles.textInput}
-            placeholder="Сколько нужно в месяц?"
-        />
-          <Text style={styles.textInputDescription}>
-              Цель
-          </Text>
-        <TextInput
+            <SafeAreaView style={{backgroundColor: '#FFFFFF'}}>
+                <ScrollView style={styles.scrollView}>
+                    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{flex: 1}}
+                                          keyboardVerticalOffset={150}>
+                        <MyImagePicker/>
+                        <Text style={styles.textInputDescription}>
+                            Название сбора</Text>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="Название сбора"
+                        />
+                        <Text style={styles.textInputDescription}>
+                            Сумма, ₽
+                        </Text>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder="Сколько нужно в месяц?"
+                        />
+                        <Text style={styles.textInputDescription}>
+                            Цель
+                        </Text>
+                        <TextInput
 
-            style={styles.textInput}
-            placeholder="Например, поддержка приюта"
-        />
-          <Text style={styles.textInputDescription}>
-        Описание
-          </Text>
-        <TextInput
-            multiline={true}
-            numberOfLines={2}
-            style={{...styles.textInput, height:70}}
-            placeholder="На что пойдут деньги и как они кому-то помогут?"
-        />
-          <Text style={styles.textInputDescription}>
-              Куда получать деньги?
-          </Text>
-        <TextInput
-            style={styles.textInput}
-            value="Счет VK Pay · 1234"
-        />
-          <Text style={styles.textInputDescription}>
-              Автор
-          </Text>
-              <RNPickerSelect
-                  style={pickerSelectStyles}
+                            style={styles.textInput}
+                            placeholder="Например, поддержка приюта"
+                        />
+                        <Text style={styles.textInputDescription}>
+                            Описание
+                        </Text>
+                        <TextInput
+                            multiline={true}
+                            numberOfLines={2}
+                            style={{...styles.textInput, height: 70}}
+                            placeholder="На что пойдут деньги и как они кому-то помогут?"
+                        />
+                        <Text style={styles.textInputDescription}>
+                            Куда получать деньги?
+                        </Text>
+                        <TextInput
+                            style={styles.textInput}
+                            value="Счет VK Pay · 1234"
+                        />
+                        <Text style={styles.textInputDescription}>
+                            Автор
+                        </Text>
+                        <RNPickerSelect
+                            style={pickerSelectStyles}
 
-                  useNativeAndroidPickerStyle={false}
-                  placeholder={{label: 'Выберите автора',
-                      value: 'user',
-                      color: '#9EA0A4'}}
-                  items={[
-                      { label: 'Андрей Иванов', value: 'user' },
-                      { label: 'Фонд поддержки сурикатов', value: 'surikaty' },
-                      { label: 'Фонд ремонта Молнии МакКвина', value: 'molnia' },
-                  ]}
-                  onValueChange={value => {
-                      changeAuthor(value)
-                  }}
-                  value={author}
-                  Icon={() => {
-                      return <Svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <Path d="M12 14.1983L6.64021 9.7318C6.21593 9.37824 5.58537 9.43556 5.2318 9.85984C4.87824 10.2841 4.93556 10.9147 5.35984 11.2682L11.3598 16.2682C11.7307 16.5773 12.2694 16.5773 12.6402 16.2682L18.6402 11.2682C19.0645 10.9147 19.1218 10.2841 18.7682 9.85984C18.4147 9.43556 17.7841 9.37824 17.3598 9.7318L12 14.1983Z" fill="#B8C1CC"/>
-                      </Svg>
+                            useNativeAndroidPickerStyle={false}
+                            placeholder={{
+                                label: 'Выберите автора',
+                                value: null,
+                                color: '#9EA0A4'
+                            }}
+                            items={[
+                                {label: 'Андрей Иванов', value: 'Андрей Иванов'},
+                                {label: 'Фонд поддержки сурикатов', value: 'Фонд поддержки сурикатов'},
+                                {label: 'Фонд ремонта Молнии МакКвина', value: 'Фонд ремонта Молнии МакКвина'},
+                            ]}
+                            onValueChange={value => {
+                                this.setState({
+                                    author: value,
+                                });
+                            }}
+                            value={this.state.author}
+                            Icon={() => {
+                                return <Svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                    <Path
+                                        d="M12 14.1983L6.64021 9.7318C6.21593 9.37824 5.58537 9.43556 5.2318 9.85984C4.87824 10.2841 4.93556 10.9147 5.35984 11.2682L11.3598 16.2682C11.7307 16.5773 12.2694 16.5773 12.6402 16.2682L18.6402 11.2682C19.0645 10.9147 19.1218 10.2841 18.7682 9.85984C18.4147 9.43556 17.7841 9.37824 17.3598 9.7318L12 14.1983Z"
+                                        fill="#B8C1CC"/>
+                                </Svg>
 
-                  }}
-              />
-        <TouchableOpacity
-            style={{...styles.button, marginBottom:40}}
-            onPress={() => navigation.navigate('Feed')}
-        >
-              <NextButton />
-        </TouchableOpacity>
-          </KeyboardAvoidingView>
-      </ScrollView>
-              </SafeAreaView>
+                            }}
+                        />
+                        <TouchableOpacity
+                            style={{...styles.button, marginBottom:40}}
+                            onPress={() => this.props.navigation.navigate('Feed')}
+                        >
+                            <NextButton />
+                        </TouchableOpacity>
+                    </KeyboardAvoidingView>
+                </ScrollView>
+            </SafeAreaView>
 
-    );
+        );
+    }
 }
 
 function DetailsScreen({ navigation }) {
@@ -285,14 +298,30 @@ function DetailsScreen({ navigation }) {
     );
   }
 
-function Feed({ navigation }) {
+function Feed({route, navigation }) {
+    const { author } = route.params;
+    const { otherParam } = route.params;
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center', width:'95%', marginLeft:'5.5%', marginRight:'5.5%'}}>
             <Text>Лента новостей (бета)</Text>
-            <Button
-                title="Go to Details... again"
-                onPress={() => navigation.push('Details')}
-            />
+            <View>
+                <View>
+                    <Text>Картинка</Text>
+                </View>
+                    <View>
+                        <Text>Добряши помогают</Text>
+                        <Text>{author}</Text>
+                    </View>
+                <View style={{flexDirection:'row', alignItems:'space-around'}}>
+                    <View>
+                        <Text>Собрано в сентябре 8750р</Text>
+                        <Text>Тут прогресс бар</Text>
+                    </View>
+                    <View>
+                        <HelpOutlineButton />
+                    </View>
+                </View>
+            </View>
         </View>
     );
 }
@@ -307,7 +336,7 @@ function App() {
         <Stack.Screen name="Donations" options={{title:"Пожертвования"}} component={Donations} />
         <Stack.Screen name="DonationType" options={{title:"Тип сбора"}} component={DonationType} />
         <Stack.Screen name="TargetDonation" options={{title:"Целевой сбор"}} component={TargetDonation} />
-        <Stack.Screen name="RegularDonation" options={{title:"Регулярный сбор"}} component={RegularDonation} />
+        <Stack.Screen name="RegularDonation" options={{title:"Регулярный сбор"}} component={RegularDonation}/>
         <Stack.Screen name="Feed" options={{title:"Лента"}} component={Feed} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
