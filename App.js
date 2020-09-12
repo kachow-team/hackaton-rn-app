@@ -239,7 +239,10 @@ class RegularDonation extends React.Component<props> {
                             Цель
                         </Text>
                         <TextInput
-
+                            ref={ref => this.textInputRef = ref}
+                            //onFocus={()=>{
+                                //console.log(this.textInputRef);
+                                //this.textInputRef && this.textInputRef.scrollTo()}}
                             style={styles.textInput}
                             placeholder="Например, поддержка приюта"
                         />
@@ -328,30 +331,59 @@ function Feed({route, navigation }) {
     const { author } = route.params;
     const { donationName } = route.params;
     const { picSource } = route.params;
-
-console.log(donationName);
     return (
-        <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center', width:'95%', marginLeft:'5.5%', marginRight:'5.5%'}}>
-            <Text>Лента новостей (бета)</Text>
-            <View>
-                <View>
-                    <Image resizeMode="cover" source={picSource} style={{borderRadius:10,width:"95%", height:"60%"}} />
+        <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center', marginLeft:'5.5%', marginRight:'5.5%'}}>
+                <View style={{backgroundColor:'black', width:"100%", height:"20%", borderRadius:10}}>
+                    <Image source={picSource} style={{borderRadius:10, width:"100%", height:"100%"}} />
                 </View>
-                    <View>
-                        <Text>{donationName}</Text>
-                        <Text>{author}</Text>
+                    <View style={{marginTop:'3%'}}>
+                        <Text style={
+                            {
+                                "marginLeft": '1%',
+                                "fontStyle": "normal",
+                                "fontWeight": "600",
+                                "fontSize": 15,
+                                "lineHeight": 20,
+                                "letterSpacing": -0.24,
+                                "color": "#000000"
+                            }
+                        }>{donationName}</Text>
+                        <Text style={
+                            {
+                                "marginLeft": '1%',
+                                "fontStyle": "normal",
+                                "fontWeight": "normal",
+                                "fontSize": 13,
+                                "lineHeight": 16,
+                                "letterSpacing": -0.078,
+                                "color": "#818C99"
+                            }
+                        }>{author}</Text>
                     </View>
-                <View style={{flexDirection:'row', alignItems:'space-around'}}>
-                    <View>
-                        <Text>Собрано в сентябре 8750р</Text>
-                        <Text>Тут прогресс бар</Text>
+                <View style={{flexDirection:'row', alignItems:'space-between', marginLeft:'1%', marginTop:'3%'}}>
+                    <View style={{width:"80%", flex: 1}}>
+                            <Text style={
+                            {
+                                flex: 2,
+                                "fontStyle": "normal",
+                                "fontWeight": "normal",
+                                "fontSize": 13,
+                                "lineHeight": 16,
+                                "letterSpacing": -0.078
+                            }
+                            }>Собрано в сентябре 8750р</Text>
+
+                            <View style={{width:"90%", flex: 1,  backgroundColor:"#3F8AE0", opacity:0.3, borderRadius:2}}>
+                            </View>
+                            <View style={{width:"70%", flex:1, backgroundColor:"#3F8AE0", borderRadius:2, position:'absolute', bottom:1, height:"29%"}}>
+                            </View>
                     </View>
                     <View>
                         <HelpOutlineButton />
                     </View>
                 </View>
             </View>
-        </View>
+
     );
 }
 
