@@ -23,11 +23,10 @@ import Svg, {
 } from 'react-native-svg';
 import HelpOutlineButton from './components/HelpOutlineButton';
 
-function MyImagePicker({ something }) {
+function MyImagePicker(props) {
   const [picSource, setPicSource] = useState(null);
     const options = {
       title: 'Выбрать обложку',
-    //  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
       storageOptions: {
         skipBackup: true,
         path: 'images',
@@ -51,6 +50,8 @@ function MyImagePicker({ something }) {
           // You can also display the image using data:
           // const source = { uri: 'data:image/jpeg;base64,' + response.data };
           setPicSource(source);
+          //send to root class
+            props.updatePicSource(source);
         }
       });
     };
@@ -187,8 +188,14 @@ function TargetDonation({ navigation }) {
 class RegularDonation extends React.Component<props> {
     state = {
         donationName: '',
-        author: 'user'
+        author: 'user',
+        picSource: null
     };
+
+    updatePicSource = (newSource) => {
+        this.setState({picSource: newSource});
+    };
+
     render() {
         return (
 
@@ -197,7 +204,7 @@ class RegularDonation extends React.Component<props> {
                 <ScrollView style={styles.scrollView}>
                     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{flex: 1}}
                                           keyboardVerticalOffset={150}>
-                        <MyImagePicker/>
+                        <MyImagePicker updatePicSource={this.updatePicSource} />
                         <Text style={styles.textInputDescription}>
                             Название сбора</Text>
                         <TextInput
@@ -272,7 +279,7 @@ class RegularDonation extends React.Component<props> {
                         />
                         <TouchableOpacity
                             style={{...styles.button, marginBottom:40}}
-                            onPress={() => this.props.navigation.navigate('Feed', {author: this.state.author, donationName: this.state.donationName})}
+                            onPress={() => this.props.navigation.navigate('Feed', {author: this.state.author, donationName: this.state.donationName, picSource: this.state.picSource})}
                         >
                             <NextButton />
                         </TouchableOpacity>
@@ -305,13 +312,15 @@ function DetailsScreen({ navigation }) {
 function Feed({route, navigation }) {
     const { author } = route.params;
     const { donationName } = route.params;
+    const { picSource } = route.params;
+
 console.log(donationName);
     return (
         <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center', width:'95%', marginLeft:'5.5%', marginRight:'5.5%'}}>
             <Text>Лента новостей (бета)</Text>
             <View>
                 <View>
-                    <Text>Картинка</Text>
+                    <Image resizeMode="cover" source={picSource} style={{borderRadius:10,width:"95%", height:"60%"}} />
                 </View>
                     <View>
                         <Text>{donationName}</Text>
