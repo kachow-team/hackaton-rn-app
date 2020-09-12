@@ -171,7 +171,7 @@ function TargetDonation({ navigation }) {
         />
         <TouchableOpacity
             style={{...styles.button, marginBottom:40}}
-            onPress={() => navigation.navigate('TargetDonation')}
+            onPress={() => navigation.navigate('Feed')}
         >
               <NextButton />
         </TouchableOpacity>
@@ -254,7 +254,7 @@ function RegularDonation({ navigation }) {
               />
         <Button
           title="Далее"
-          onPress={() => navigation.navigate('Details')}
+          onPress={() => navigation.navigate('Feed')}
         />
           </KeyboardAvoidingView>
       </ScrollView>
@@ -284,16 +284,10 @@ function DetailsScreen({ navigation }) {
 function Feed({ navigation }) {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Details Screen</Text>
+            <Text>Лента новостей (бета)</Text>
             <Button
                 title="Go to Details... again"
                 onPress={() => navigation.push('Details')}
-            />
-            <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-            <Button title="Go back" onPress={() => navigation.goBack()} />
-            <Button
-                title="Go back to first screen in stack"
-                onPress={() => navigation.popToTop()}
             />
         </View>
     );
