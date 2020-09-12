@@ -12,6 +12,64 @@ import CreateDonationButton from './components/CreateDonationButton';
 import UploadPicCover from './components/UploadPicCover';
 import DismissOverlay from './components/DismissOverlay';
 
+function MyImagePicker({ something }) {
+  const [picSource, setPicSource] = useState(null);
+    const options = {
+      title: 'Select Avatar',
+      customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    const pick = () => {
+      ImagePicker.showImagePicker(options, (response) => {
+        console.log('Response = ', response);
+      
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+        } else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+        } else {
+          //const source = 'data:image/jpeg;base64,' + response.data;
+           const source = { uri: response.uri };
+          //const source = { uri: 'data:image/jpeg;base64,' + response.data };
+          console.log('source = ', source);
+          // You can also display the image using data:
+          // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+          setPicSource(source);
+        }
+      });
+    };
+    if (picSource == null) {
+      return (
+        <View style={{paddingVertical:20, paddingHorizontal:20, width:"100%", height:"30%"}}>
+      <TouchableOpacity
+          style={styles.button}
+          onPress={pick}
+      >
+            <UploadPicCover />
+      </TouchableOpacity>
+      </View>
+      );
+    } else {
+      return (
+        <View style={{paddingVertical:20, paddingHorizontal:20, width:"100%", height:"30%"}}>
+        <Image resizeMode="cover" source={picSource} style={{borderRadius:10,width:"100%", height:"100%"}} />
+        <View style={{position:"absolute", top:30, right:30}}>
+        <TouchableOpacity
+        onPress={() => {setPicSource(null)}}
+        >
+        <DismissOverlay />
+        </TouchableOpacity>
+        </View>
+        </View>
+      );
+    }
+}
+
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -63,49 +121,10 @@ function DonationType({ navigation }) {
 }
 
 function TargetDonation({ navigation }) {
-  const [picSource, setPicSource] = useState(null);
-    const options = {
-      title: 'Select Avatar',
-      customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-    const pick = () => {
-      ImagePicker.showImagePicker(options, (response) => {
-        console.log('Response = ', response);
-      
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
-        } else if (response.error) {
-          console.log('ImagePicker Error: ', response.error);
-        } else if (response.customButton) {
-          console.log('User tapped custom button: ', response.customButton);
-        } else {
-          //const source = 'data:image/jpeg;base64,' + response.data;
-           const source = { uri: response.uri };
-          //const source = { uri: 'data:image/jpeg;base64,' + response.data };
-          console.log('source = ', source);
-          // You can also display the image using data:
-          // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-          setPicSource(source);
-        }
-      });
-    };
     return (
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        {picSource == null ? (
-        <TouchableOpacity
-            style={styles.button}
-            onPress={pick}
-        >
-              <UploadPicCover />
-        </TouchableOpacity>
-        ) : (
-          <Image source={picSource} style={styles.uploadPic} />
-        )}
+        <MyImagePicker />
         <Text>Название сбора</Text>
         <TextInput
             style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
@@ -141,60 +160,10 @@ function TargetDonation({ navigation }) {
 }
 
 function RegularDonation({ navigation }) {
-    const [picSource, setPicSource] = useState(null);
-    const options = {
-      title: 'Select Avatar',
-      customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
-      storageOptions: {
-        skipBackup: true,
-        path: 'images',
-      },
-    };
-    const pick = () => {
-      ImagePicker.showImagePicker(options, (response) => {
-        console.log('Response = ', response);
-      
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
-        } else if (response.error) {
-          console.log('ImagePicker Error: ', response.error);
-        } else if (response.customButton) {
-          console.log('User tapped custom button: ', response.customButton);
-        } else {
-          //const source = 'data:image/jpeg;base64,' + response.data;
-           const source = { uri: response.uri };
-          //const source = { uri: 'data:image/jpeg;base64,' + response.data };
-          console.log('source = ', source);
-          // You can also display the image using data:
-          // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-          setPicSource(source);
-        }
-      });
-    };
     return (
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        {picSource == null ? (
-          <View style={{paddingVertical:20, paddingHorizontal:20, width:"100%", height:"30%"}}>
-        <TouchableOpacity
-            style={styles.button}
-            onPress={pick}
-        >
-              <UploadPicCover />
-        </TouchableOpacity>
-        </View>
-        ) : (
-          <View style={{paddingVertical:20, paddingHorizontal:20, width:"100%", height:"30%"}}>
-          <Image resizeMode="cover" source={picSource} style={{borderRadius:10,width:"100%", height:"100%"}} />
-          <View style={{position:"absolute", top:30, right:30}}>
-          <TouchableOpacity
-          onPress={() => {setPicSource(null)}}
-          >
-          <DismissOverlay />
-          </TouchableOpacity>
-          </View>
-          </View>
-        )}
+        <MyImagePicker />
         <Text style={styles.textInputDescription} >
             Название сбора</Text>
         <TextInput
