@@ -23,7 +23,7 @@ import Svg, {
     Mask,
 } from 'react-native-svg';
 
-class CreateRegularHelp extends Component {
+class UploadPicCover extends Component {
     render() {
         return (
             <Svg width="353" height="142" viewBox="0 0 353 142" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,4 +36,4 @@ class CreateRegularHelp extends Component {
     }
 }
 
-export default CreateRegularHelp;
+export default UploadPicCover;

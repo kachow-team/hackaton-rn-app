@@ -11,6 +11,7 @@ import CreateRegularHelp from './components/CreateRegularHelp';
 import CreateDonationButton from './components/CreateDonationButton';
 import UploadPicCover from './components/UploadPicCover';
 import DismissOverlay from './components/DismissOverlay';
+import NextButton from './components/NextButton';
 
 function MyImagePicker({ something }) {
   const [picSource, setPicSource] = useState(null);
@@ -125,35 +126,47 @@ function TargetDonation({ navigation }) {
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         <MyImagePicker />
-        <Text>Название сбора</Text>
+        <Text style={styles.textInputDescription} >
+          Название сбора
+          </Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.textInput}
             placeholder="Название сбора"
         />
-        <Text>Сумма, ₽</Text>
+        <Text style={styles.textInputDescription} >
+          Сумма, ₽
+          </Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.textInput}
             placeholder="Сколько нужно собрать?"
         />
-        <Text>Цель</Text>
+        <Text style={styles.textInputDescription}>
+          Цель
+          </Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.textInput}
             placeholder="Например, лечение человека"
         />
-        <Text>Описание</Text>
+        <Text style={styles.textInputDescription} >
+          Описание
+          </Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.textInput}
             placeholder="На что пойдут деньги и как они кому-то помогут?"
         />
-        <Text>Куда получать деньги?</Text>
+        <Text style={styles.textInputDescription} >
+          Куда получать деньги?
+          </Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.textInput}
             value="Счет VK Pay · 1234"
         />
-        <Button
-          title="Далее"
-          onPress={() => navigation.navigate('Details')}
-        />
+        <TouchableOpacity
+            style={{...styles.button, marginBottom:40}}
+            onPress={() => navigation.navigate('TargetDonation')}
+        >
+              <NextButton />
+        </TouchableOpacity>
       </ScrollView>
       </SafeAreaView>
     );
@@ -200,14 +213,14 @@ function RegularDonation({ navigation }) {
               Куда получать деньги?
           </Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.textInput}
             value="Счет VK Pay · 1234"
         />
           <Text style={styles.textInputDescription}>
               Автор
           </Text>
         <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={styles.textInput}
             value="Матвей Правосудов"
         />
         <Button
@@ -285,7 +298,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     textInput: {
-      marginLeft: '2.5%',
+      marginLeft: '5.5%',
         "backgroundColor": "#F2F3F5",
         "borderWidth": 0.5,
         "borderColor": "rgba(0, 0, 0, 0.12)",
@@ -294,7 +307,7 @@ const styles = StyleSheet.create({
         "borderTopRightRadius": 10,
         "borderBottomRightRadius": 10,
         "borderBottomLeftRadius": 10,
-        "width": '95%',
+        "width": '89%',
         "height": 40,
         "paddingLeft": 15,
         marginBottom: 30,
@@ -302,7 +315,7 @@ const styles = StyleSheet.create({
     },
     textInputDescription:{
         alignSelf:'flex-start',
-        marginLeft: '2.5%',
+        marginLeft: '5.5%',
         marginBottom: 8,
         color:'#6D7885',
         //"fontFamily": "SF Pro Text",

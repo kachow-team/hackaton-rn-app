@@ -23,7 +23,7 @@ import Svg, {
     Mask,
 } from 'react-native-svg';
 
-class CreateRegularHelp extends Component {
+class CreateDonationButton extends Component {
     render() {
         return (
             <Svg width="134" height="36" viewBox="0 0 134 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,4 +35,4 @@ class CreateRegularHelp extends Component {
     }
 }
 
-export default CreateRegularHelp;
+export default CreateDonationButton;
