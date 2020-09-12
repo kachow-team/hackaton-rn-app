@@ -191,7 +191,7 @@ placeholder="Например, лечение человека"
         />
         <TouchableOpacity
             style={{...styles.button, marginBottom:40}}
-            onPress={() => this.props.navigation.navigate('Feed', {author: "Андрей Иванов", donationName: this.state.donationName, picSource: this.state.picSource, description: this.state.description})}
+            onPress={() => this.props.navigation.navigate('Feed', {author: "Андрей Иванов", donationName: this.state.donationName, picSource: this.state.picSource, description: this.state.description, typehelp:'Целевой'})}
         >
               <NextButton />
         </TouchableOpacity>
@@ -301,7 +301,7 @@ class RegularDonation extends React.Component<props> {
                         />
                         <TouchableOpacity
                             style={{...styles.button, marginBottom:40}}
-                            onPress={() => this.props.navigation.navigate('Feed', {author: this.state.author, donationName: this.state.donationName, picSource: this.state.picSource, description: this.state.description})}
+                            onPress={() => this.props.navigation.navigate('Feed', {author: this.state.author, donationName: this.state.donationName, picSource: this.state.picSource, description: this.state.description, typehelp:'Регулярный'})}
                         >
                             <NextButton />
                         </TouchableOpacity>
@@ -336,6 +336,8 @@ function Feed({route, navigation }) {
     const { donationName } = route.params;
     const { picSource } = route.params;
     const { description } = route.params;
+    const { typehelp } = route.params;
+
     return (
         <View style={{flex:1, backgroundColor:'#FFFFFF'}}>
         <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center', marginLeft:'5.5%', marginRight:'5.5%'}}>
@@ -389,7 +391,7 @@ function Feed({route, navigation }) {
                     <View>
                     <TouchableOpacity
 
-                      onPress={() => navigation.navigate('BigMock', {picSource: picSource, donationName: donationName, author: author, description:description})}
+                      onPress={() => navigation.navigate('BigMock', {picSource: picSource, donationName: donationName, author: author, description:description, typehelp:typehelp})}
                     >
                     <HelpOutlineButton />
                     </TouchableOpacity>
@@ -407,6 +409,7 @@ function BigMock({ route, navigation }) {
     const { donationName } = route.params;
     const { picSource } = route.params;
     const { description } = route.params;
+    const { typehelp } = route.params;
   return (
     <SafeAreaView style={{backgroundColor: '#FFFFFF'}}>
                 <ScrollView style={styles.scrollView}>
@@ -418,7 +421,8 @@ function BigMock({ route, navigation }) {
         <View style={{paddingTop:20, paddingLeft:10}}>
           <Text style={styles.textTitle}>{donationName}</Text>
           <Text style={styles.textAuthor}>Автор {author}</Text>
-          <Text style={styles.textType}>{description}</Text>
+            <Text style={styles.textType}>{typehelp}</Text>
+          <Text >{description}</Text>
         </View>
         <View>
           <PostFooter/>
