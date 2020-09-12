@@ -210,6 +210,7 @@ class RegularDonation extends React.Component<props> {
                         <TextInput
                             style={styles.textInput}
                             placeholder="Сколько нужно в месяц?"
+                            keyboardType='numeric'
                         />
                         <Text style={styles.textInputDescription}>
                             Цель
