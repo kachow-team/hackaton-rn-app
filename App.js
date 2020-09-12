@@ -24,10 +24,8 @@ function HomeScreen({ navigation }) {
 }
 
 function Donations({ navigation }) {
-    const [avatarSource, setAvatarSource] = useState(null);
     return (
       <View style={styles.donationsScreen}>
-        <Image source={avatarSource} style={styles.uploadAvatar} />
         <Text>У Вас пока нет сборов.</Text>
         <Text>Начниете доброе дело.</Text>
         <Text></Text>
@@ -110,15 +108,49 @@ function TargetDonation({ navigation }) {
 }
 
 function RegularDonation({ navigation }) {
+    const [picSource, setPicSource] = useState(null);
+    const options = {
+      title: 'Select Avatar',
+      customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    const pick = () => {
+      ImagePicker.showImagePicker(options, (response) => {
+        console.log('Response = ', response);
+      
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+        } else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+        } else {
+          //const source = 'data:image/jpeg;base64,' + response.data;
+           const source = { uri: response.uri };
+          //const source = { uri: 'data:image/jpeg;base64,' + response.data };
+          console.log('source = ', source);
+          // You can also display the image using data:
+          // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+          setPicSource(source);
+        }
+      });
+    };
     return (
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
+        {picSource == null ? (
         <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('TargetDonation')}
+            onPress={pick}
         >
               <UploadPicCover />
         </TouchableOpacity>
+        ) : (
+          <Image source={picSource} style={styles.uploadPic} />
+        )}
         <Text style={styles.textInputDescription} >
             Название сбора</Text>
         <TextInput
@@ -268,9 +300,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         padding: 0
     },
-    uploadAvatar: {
+    uploadPic: {
         backgroundColor: "#DDDDDD",
-        justifyContent: "center"
+        justifyContent: "center",
+        width: 100, height: 50
     },
     container: {
       flex: 1,
