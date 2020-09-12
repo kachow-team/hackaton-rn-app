@@ -15,8 +15,8 @@ import DismissOverlay from './components/DismissOverlay';
 function MyImagePicker({ something }) {
   const [picSource, setPicSource] = useState(null);
     const options = {
-      title: 'Select Avatar',
-      customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+      title: 'Выбрать обложку',
+    //  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
       storageOptions: {
         skipBackup: true,
         path: 'images',
@@ -163,8 +163,8 @@ function RegularDonation({ navigation }) {
     return (
 
 
-              <SafeAreaView>
-      <ScrollView style={styles.scrollView}>
+              <SafeAreaView style={{backgroundColor:'#FFFFFF'}}>
+      <ScrollView style={styles.scrollView} >
           <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{flex: 1}} keyboardVerticalOffset={150}>
         <MyImagePicker />
         <Text style={styles.textInputDescription} >
