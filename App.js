@@ -132,40 +132,54 @@ function DonationType({ navigation }) {
     );
 }
 
-function TargetDonation({ navigation }) {
+class TargetDonation extends React.Component<props> {
+  state = {
+    donationName: '',
+    author: 'user',
+    picSource: null
+};
+updatePicSource = (newSource) => {
+  this.setState({picSource: newSource});
+};
+render() {
     return (
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{flex: 1}} keyboardVerticalOffset={150}>
-        <MyImagePicker />
+        <MyImagePicker updatePicSource={this.updatePicSource} />
         <Text style={styles.textInputDescription} >
           Название сбора
           </Text>
-        <TextInput
-            style={styles.textInput}
-            placeholder="Название сбора"
-        />
+          <TextInput
+                            style={styles.textInput}
+                            placeholder="Название сбора"
+                            onChangeText={((value)=> this.setState({donationName:value}))}
+                        />
         <Text style={styles.textInputDescription} >
           Сумма, ₽
           </Text>
-        <TextInput
-            style={styles.textInput}
-            placeholder="Сколько нужно собрать?"
-        />
+          <TextInput
+                            style={styles.textInput}
+                            placeholder="Сколько нужно собрать?"
+                            keyboardType='numeric'
+                        />
         <Text style={styles.textInputDescription}>
           Цель
           </Text>
-        <TextInput
-            style={styles.textInput}
-            placeholder="Например, лечение человека"
-        />
+          <TextInput
+
+style={styles.textInput}
+placeholder="Например, лечение человека"
+/>
         <Text style={styles.textInputDescription} >
           Описание
           </Text>
-        <TextInput
-            style={styles.textInput}
-            placeholder="На что пойдут деньги и как они кому-то помогут?"
-        />
+          <TextInput
+                            multiline={true}
+                            numberOfLines={2}
+                            style={{...styles.textInput, height: 70}}
+                            placeholder="На что пойдут деньги и как они кому-то помогут?"
+                        />
         <Text style={styles.textInputDescription} >
           Куда получать деньги?
           </Text>
@@ -175,7 +189,7 @@ function TargetDonation({ navigation }) {
         />
         <TouchableOpacity
             style={{...styles.button, marginBottom:40}}
-            onPress={() => navigation.navigate('Feed')}
+            onPress={() => this.props.navigation.navigate('BigMock', {picSource: this.state.picSource})}
         >
               <NextButton />
         </TouchableOpacity>
@@ -183,6 +197,7 @@ function TargetDonation({ navigation }) {
       </ScrollView>
       </SafeAreaView>
     );
+}
 }
 
 class RegularDonation extends React.Component<props> {
@@ -377,13 +392,23 @@ function Feed({route, navigation }) {
     );
 }
 
-function BigMock({ navigation }) {
+function BigMock({ route, navigation }) {
+  const { author } = route.params;
+    const { donationName } = route.params;
+    const { picSource } = route.params;
+    console.log(picSource);
   return (
     <SafeAreaView style={{backgroundColor: '#FFFFFF'}}>
                 <ScrollView style={styles.scrollView}>
                     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{flex: 1}}
                                           keyboardVerticalOffset={150}>
-    <PostFooter />
+        <View style={{ width:"100%", height:160}}>
+        <Image resizeMode="cover" source={picSource} style={{width:"100%", height:"100%"}} />
+        </View>
+        <View>
+          <PostFooter/>
+        </View>
+                
     </KeyboardAvoidingView>
     </ScrollView>
     </SafeAreaView>
@@ -395,7 +420,7 @@ const Stack = createStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="BigMock" screenOptions={{
+      <Stack.Navigator initialRouteName="Donations" screenOptions={{
           headerBackTitleVisible: false}}>
         <Stack.Screen name="Donations" options={{title:"Пожертвования"}} component={Donations} />
         <Stack.Screen name="DonationType" options={{title:"Тип сбора"}} component={DonationType} />
