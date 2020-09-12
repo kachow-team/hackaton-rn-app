@@ -62,18 +62,49 @@ function DonationType({ navigation }) {
 }
 
 function TargetDonation({ navigation }) {
+  const [picSource, setPicSource] = useState(null);
+    const options = {
+      title: 'Select Avatar',
+      customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    const pick = () => {
+      ImagePicker.showImagePicker(options, (response) => {
+        console.log('Response = ', response);
+      
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+        } else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+        } else {
+          //const source = 'data:image/jpeg;base64,' + response.data;
+           const source = { uri: response.uri };
+          //const source = { uri: 'data:image/jpeg;base64,' + response.data };
+          console.log('source = ', source);
+          // You can also display the image using data:
+          // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+          setPicSource(source);
+        }
+      });
+    };
     return (
-      <View style={styles.donationTypeScreen}>
-          <TouchableOpacity
+      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        {picSource == null ? (
+        <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('TargetDonation')}
+            onPress={pick}
         >
               <UploadPicCover />
         </TouchableOpacity>
-        <Button
-          title="Загрузить обложку"
-          onPress={() => navigation.navigate('Details')}
-        />
+        ) : (
+          <Image source={picSource} style={styles.uploadPic} />
+        )}
         <Text>Название сбора</Text>
         <TextInput
             style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
@@ -103,7 +134,8 @@ function TargetDonation({ navigation }) {
           title="Далее"
           onPress={() => navigation.navigate('Details')}
         />
-      </View>
+      </ScrollView>
+      </SafeAreaView>
     );
 }
 
