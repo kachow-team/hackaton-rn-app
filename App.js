@@ -12,6 +12,7 @@ import CreateDonationButton from './components/CreateDonationButton';
 import UploadPicCover from './components/UploadPicCover';
 import DismissOverlay from './components/DismissOverlay';
 import NextButton from './components/NextButton';
+import PostFooter from './components/PostFooter';
 
 //select
 import {Picker} from '@react-native-community/picker';
@@ -330,20 +331,32 @@ console.log(donationName);
     );
 }
 
+function BigMock({ navigation }) {
+  return (
+    <SafeAreaView style={{backgroundColor: '#FFFFFF'}}>
+                <ScrollView style={styles.scrollView}>
+                    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : null} style={{flex: 1}}
+                                          keyboardVerticalOffset={150}>
+    <PostFooter />
+    </KeyboardAvoidingView>
+    </ScrollView>
+    </SafeAreaView>
+  );
+}
+
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Donations" screenOptions={{
+      <Stack.Navigator initialRouteName="BigMock" screenOptions={{
           headerBackTitleVisible: false}}>
         <Stack.Screen name="Donations" options={{title:"Пожертвования"}} component={Donations} />
         <Stack.Screen name="DonationType" options={{title:"Тип сбора"}} component={DonationType} />
         <Stack.Screen name="TargetDonation" options={{title:"Целевой сбор"}} component={TargetDonation} />
         <Stack.Screen name="RegularDonation" options={{title:"Регулярный сбор"}} component={RegularDonation}/>
         <Stack.Screen name="Feed" options={{title:"Лента"}} component={Feed} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="BigMock" options={{headerShown:false}} component={BigMock}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
