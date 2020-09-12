@@ -13,6 +13,14 @@ import UploadPicCover from './components/UploadPicCover';
 import DismissOverlay from './components/DismissOverlay';
 import NextButton from './components/NextButton';
 
+//select
+import {Picker} from '@react-native-community/picker';
+import RNPickerSelect from 'react-native-picker-select';
+
+import Svg, {
+    Path,
+} from 'react-native-svg';
+
 function MyImagePicker({ something }) {
   const [picSource, setPicSource] = useState(null);
     const options = {
@@ -173,6 +181,7 @@ function TargetDonation({ navigation }) {
 }
 
 function RegularDonation({ navigation }) {
+    const [author, changeAuthor] = useState('user');
     return (
 
 
@@ -197,6 +206,7 @@ function RegularDonation({ navigation }) {
               Цель
           </Text>
         <TextInput
+
             style={styles.textInput}
             placeholder="Например, поддержка приюта"
         />
@@ -219,10 +229,29 @@ function RegularDonation({ navigation }) {
           <Text style={styles.textInputDescription}>
               Автор
           </Text>
-        <TextInput
-            style={styles.textInput}
-            value="Матвей Правосудов"
-        />
+              <RNPickerSelect
+                  style={pickerSelectStyles}
+
+                  useNativeAndroidPickerStyle={false}
+                  placeholder={{label: 'Выберите автора',
+                      value: 'user',
+                      color: '#9EA0A4'}}
+                  items={[
+                      { label: 'Андрей Иванов', value: 'user' },
+                      { label: 'Фонд поддержки сурикатов', value: 'surikaty' },
+                      { label: 'Фонд ремонта Молнии МакКвина', value: 'molnia' },
+                  ]}
+                  onValueChange={value => {
+                      changeAuthor(value)
+                  }}
+                  value={author}
+                  Icon={() => {
+                      return <Svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <Path d="M12 14.1983L6.64021 9.7318C6.21593 9.37824 5.58537 9.43556 5.2318 9.85984C4.87824 10.2841 4.93556 10.9147 5.35984 11.2682L11.3598 16.2682C11.7307 16.5773 12.2694 16.5773 12.6402 16.2682L18.6402 11.2682C19.0645 10.9147 19.1218 10.2841 18.7682 9.85984C18.4147 9.43556 17.7841 9.37824 17.3598 9.7318L12 14.1983Z" fill="#B8C1CC"/>
+                      </Svg>
+
+                  }}
+              />
         <Button
           title="Далее"
           onPress={() => navigation.navigate('Details')}
@@ -252,6 +281,24 @@ function DetailsScreen({ navigation }) {
     );
   }
 
+function Feed({ navigation }) {
+    return (
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text>Details Screen</Text>
+            <Button
+                title="Go to Details... again"
+                onPress={() => navigation.push('Details')}
+            />
+            <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+            <Button title="Go back" onPress={() => navigation.goBack()} />
+            <Button
+                title="Go back to first screen in stack"
+                onPress={() => navigation.popToTop()}
+            />
+        </View>
+    );
+}
+
 const Stack = createStackNavigator();
 
 function App() {
@@ -263,6 +310,7 @@ function App() {
         <Stack.Screen name="DonationType" options={{title:"Тип сбора"}} component={DonationType} />
         <Stack.Screen name="TargetDonation" options={{title:"Целевой сбор"}} component={TargetDonation} />
         <Stack.Screen name="RegularDonation" options={{title:"Регулярный сбор"}} component={RegularDonation} />
+        <Stack.Screen name="Feed" options={{title:"Лента"}} component={Feed} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
@@ -363,4 +411,42 @@ const styles = StyleSheet.create({
     }
   });
 
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        marginLeft: '2.5%',
+        "backgroundColor": "#F2F3F5",
+        "borderWidth": 0.5,
+        "borderColor": "rgba(0, 0, 0, 0.12)",
+        "borderStyle": "solid",
+        "borderTopLeftRadius": 10,
+        "borderTopRightRadius": 10,
+        "borderBottomRightRadius": 10,
+        "borderBottomLeftRadius": 10,
+        "width": '95%',
+        "height": 40,
+        "paddingLeft": 15,
+        marginBottom: 30,
+        paddingRight: 30, // to ensure the text is never behind the icon
+    },
+    inputAndroid: {
+        marginLeft: '2.5%',
+        "backgroundColor": "#F2F3F5",
+        "borderWidth": 0.5,
+        "borderColor": "rgba(0, 0, 0, 0.12)",
+        "borderStyle": "solid",
+        "borderTopLeftRadius": 10,
+        "borderTopRightRadius": 10,
+        "borderBottomRightRadius": 10,
+        "borderBottomLeftRadius": 10,
+        "width": '95%',
+        "height": 40,
+        "paddingLeft": 15,
+        marginBottom: 30,
+        paddingRight: 30, // to ensure the text is never behind the icon
+    },
+    iconContainer: {
+        top: 8,
+        right: 17,
+    }
+});
 export default App;
