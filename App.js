@@ -46,7 +46,7 @@ function MyImagePicker({ something }) {
     };
     if (picSource == null) {
       return (
-        <View style={{paddingVertical:20, paddingHorizontal:20, width:"100%", height:"30%"}}>
+        <View style={{paddingVertical:20, paddingHorizontal:20, width:"100%", height:250}}>
       <TouchableOpacity
           style={styles.button}
           onPress={pick}
@@ -57,7 +57,7 @@ function MyImagePicker({ something }) {
       );
     } else {
       return (
-        <View style={{paddingVertical:20, paddingHorizontal:20, width:"100%", height:"30%"}}>
+        <View style={{paddingVertical:20, paddingHorizontal:20, width:"100%", height:250}}>
         <Image resizeMode="cover" source={picSource} style={{borderRadius:10,width:"100%", height:"100%"}} />
         <View style={{position:"absolute", top:30, right:30}}>
         <TouchableOpacity
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: "center",
-      marginTop: Constants.statusBarHeight,
+      //marginTop: Constants.statusBarHeight,
     },
     button: {
       alignItems: "center",
