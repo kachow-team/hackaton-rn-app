@@ -189,7 +189,7 @@ placeholder="Например, лечение человека"
         />
         <TouchableOpacity
             style={{...styles.button, marginBottom:40}}
-            onPress={() => this.props.navigation.navigate('BigMock', {picSource: this.state.picSource})}
+            onPress={() => this.props.navigation.navigate('BigMock', {picSource: this.state.picSource, donationName: this.state.donationName})}
         >
               <NextButton />
         </TouchableOpacity>
@@ -368,6 +368,11 @@ function BigMock({ route, navigation }) {
         <View style={{ width:"100%", height:160}}>
         <Image resizeMode="cover" source={picSource} style={{width:"100%", height:"100%"}} />
         </View>
+        <View style={{paddingTop:20, paddingLeft:10}}>
+          <Text style={styles.textTitle}>{donationName}</Text>
+          <Text style={styles.textAuthor}>Автор {author}</Text>
+          <Text style={styles.textType}>Type</Text>
+        </View>
         <View>
           <PostFooter/>
         </View>
@@ -451,6 +456,30 @@ const styles = StyleSheet.create({
         "lineHeight": 18,
         "letterSpacing": -0.154,
     },
+    textTitle: {
+      //"fontFamily": "SF Pro Display",
+      "fontStyle": "normal",
+      "fontWeight": "bold",
+      "fontSize": 24,
+      "lineHeight": 28,
+      "letterSpacing": 0.326451
+    },
+    textAuthor: {
+      "fontStyle": "normal",
+      "fontWeight": "500",
+      "fontSize": 14,
+      "lineHeight": 18,
+      "letterSpacing": -0.154,
+      "color": "#6D7885"
+    },
+    textType: {
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "fontSize": 13,
+      "lineHeight": 16,
+      "letterSpacing": -0.078,
+      "color": "#818C99"
+    },
     createDonationButton: {
         backgroundColor: "#4986CC",
         borderRadius: 10,
@@ -528,4 +557,5 @@ const pickerSelectStyles = StyleSheet.create({
         right: 17,
     }
 });
+
 export default App;
