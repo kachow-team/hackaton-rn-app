@@ -268,7 +268,7 @@ class RegularDonation extends React.Component<props> {
                         />
                         <TouchableOpacity
                             style={{...styles.button, marginBottom:40}}
-                            onPress={() => this.props.navigation.navigate('Feed')}
+                            onPress={() => this.props.navigation.navigate('Feed', {author: this.state.author})}
                         >
                             <NextButton />
                         </TouchableOpacity>
